@@ -24,7 +24,7 @@
 ## Testing Tool
 - Postman use 
   
-The API will be available at `http://localhost:8080`.
+The API will be available at `http://localhost:4041`.
 
 ## API Endpoints
 -Category
