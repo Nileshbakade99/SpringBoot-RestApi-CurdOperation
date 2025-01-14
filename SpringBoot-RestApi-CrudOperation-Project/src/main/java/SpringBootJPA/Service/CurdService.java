@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import SpringBootJPA.Model.Category;
+import SpringBootJPA.Model.CategoryDTO;
 import SpringBootJPA.Model.Product;
+import SpringBootJPA.Model.ProductDTO;
 import SpringBootJPA.Repository.ICategoryRepository;
 import SpringBootJPA.Repository.IProductRepository;
 
@@ -70,8 +72,9 @@ public class CurdService implements ICrudService {
 	}
 
 	@Override
-	public Product fetchProductById(Integer pid){
-		return prodRepo.findById(pid).orElseThrow(()-> new FetchNotFoundException("Product Id not Found", pid));
+	public ProductDTO fetchProductById(Integer pid)throws FetchNotFoundException {
+		Product product = prodRepo.findById(pid).orElseThrow(()->new FetchNotFoundException("Not Found", pid));
+		return toManyDTO(product);
 	}
 
 	@Override
@@ -100,6 +103,22 @@ public class CurdService implements ICrudService {
 	public Page<Product> getPagination(Integer pageno, Integer pagesize) {
 		Pageable pageable = PageRequest.of(pageno,pagesize);
 		return prodRepo.findAll(pageable);
+	}
+	
+	@Override
+	public ProductDTO toManyDTO(Product product) {
+		CategoryDTO dto = new CategoryDTO();
+		dto.setCid(product.getCategory().getCid());
+		dto.setCname(product.getCategory().getCname());
+		
+		ProductDTO pdto = new ProductDTO();
+		pdto.setPid(product.getPid());
+		pdto.setPname(product.getPname());
+		pdto.setDescription(product.getDescription());
+		pdto.setPrice(product.getPrice());
+		pdto.setCategoryDTO(dto);
+		
+		return pdto;
 	}
 }
 

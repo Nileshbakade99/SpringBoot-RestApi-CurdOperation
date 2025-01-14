@@ -43,7 +43,7 @@ public class Product implements Serializable{
 	@NonNull
 	private Float price;
 	
-	/*@ManyToOne(targetEntity = Category.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "Category_ID",referencedColumnName = "CID")
-	private Category category;*/
+	private Category category;
 }

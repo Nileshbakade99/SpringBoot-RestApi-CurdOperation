@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 
 import SpringBootJPA.Model.Category;
 import SpringBootJPA.Model.Product;
+import SpringBootJPA.Model.ProductDTO;
 
 public interface ICrudService {
 
@@ -29,13 +30,15 @@ public interface ICrudService {
 	public String registerProduct(Product product);
 	
 	//getbyid
-	public Product fetchProductById(Integer pid);
+	public ProductDTO fetchProductById(Integer pid);
 	
 	//update
 	public String updateProduct(Integer pid ,Product product);
 	
 	//remove
 	public String removeProduct(Integer pid);
+	
+	public ProductDTO toManyDTO(Product product); 
 	
 	//pagination
 	public Page<Product> getPagination(Integer pageno, Integer pagesize);

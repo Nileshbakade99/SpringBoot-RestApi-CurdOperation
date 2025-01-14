@@ -1,4 +1,4 @@
-package SpringBootJPA.RestController;
+ package SpringBootJPA.RestController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import SpringBootJPA.Model.CategoryDTO;
 import SpringBootJPA.Model.Product;
+import SpringBootJPA.Model.ProductDTO;
 import SpringBootJPA.Service.ICrudService;
 
 @RestController
@@ -34,7 +36,7 @@ public class ProductController {
 		}
 	}
 	
-	@GetMapping("/find/{pid}")
+	/*@GetMapping("/find/{pid}")
 	public ResponseEntity<?> fetchProductData(@PathVariable ("pid") Integer pid){
 		try {
 			Product result = service.fetchProductById(pid);
@@ -42,7 +44,7 @@ public class ProductController {
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
+	}*/
 	
 	@PutMapping("/modify/{pid}")
 	public ResponseEntity<String> updateProduct(@PathVariable("pid") Integer pid, @RequestBody Product product ){
@@ -72,6 +74,16 @@ public class ProductController {
 			return new ResponseEntity<Page<Product>>(result,HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Page<Product>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/PPPP/{pid}")
+	public ResponseEntity<ProductDTO> showDTOO(@PathVariable ("pid") Integer pid){
+		try {
+			ProductDTO pdto = service.fetchProductById(pid);
+			return new ResponseEntity<ProductDTO>(pdto,HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<ProductDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
